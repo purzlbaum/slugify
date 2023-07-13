@@ -1,0 +1,208 @@
+<!doctype html>
+<html class="no-js" lang="de">
+
+<head>
+    <meta charset="utf-8">
+    <title>Slugify</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta property="og:title" content="">
+    <meta property="og:type" content="">
+    <meta property="og:url" content="">
+    <meta property="og:image" content="">
+
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <style>
+        html, body, div, span, applet, object, iframe,
+        h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+        a, abbr, acronym, address, big, cite, code,
+        del, dfn, em, img, ins, kbd, q, s, samp,
+        small, strike, strong, sub, sup, tt, var,
+        b, u, i, center,
+        dl, dt, dd, ol, ul, li,
+        fieldset, form, label, legend,
+        table, caption, tbody, tfoot, thead, tr, th, td,
+        article, aside, canvas, details, embed,
+        figure, figcaption, footer, header, hgroup,
+        menu, nav, output, ruby, section, summary,
+        time, mark, audio, video, button {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font-size: 100%;
+            font: inherit;
+            vertical-align: baseline;
+            -webkit-appearance: none;
+            background: none;
+        }
+
+        /* HTML5 display-role reset for older browsers */
+        article, aside, details, figcaption, figure,
+        footer, header, hgroup, menu, nav, section {
+            display: block;
+        }
+
+        body {
+            line-height: 1;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        blockquote, q {
+            quotes: none;
+        }
+
+        blockquote:before, blockquote:after,
+        q:before, q:after {
+            content: '';
+            content: none;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        @font-face {
+            font-family: 'Inter';
+            src: url('./dist/fonts/Inter-Regular.woff2') format('woff2'),
+            url('./dist/fonts/Inter-Regular.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+            font-display: swap;
+        }
+
+        html {
+            font-size: 62.5%;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-text-size-adjust: 100%;
+            font-size: 1.6rem;
+            line-height: 1.5;
+        }
+
+        .title-h1 {
+            font-weight: 400;
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+            font-size: 5.6rem;
+        }
+
+        .title-h1 + * {
+            margin-top: 32px;
+        }
+
+        .form {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 600px;
+        }
+
+        .form__group {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: center;
+        }
+
+        .form__group--button {
+            justify-content: flex-end;
+        }
+
+        .form__group + .form__group {
+            margin-top: 8px;
+        }
+
+        .form__group + .form__group--button {
+            margin-top: 16px;
+        }
+
+        .form__label {
+            width: 100px;
+        }
+
+        .form__input {
+            border: 1px solid #EEEEEE;
+            border-radius: 6px;
+            padding: 6px 12px;
+            width: calc(100% - 100px);
+            resize: none;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form__button {
+            font-family: 'Inter', sans-serif;
+            padding: 6px 12px;
+            background: #3949AB;
+            color: #ffffff;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.4s ease;
+        }
+
+        .form__button:hover {
+            background: #1A237E;
+        }
+    </style>
+</head>
+
+<body>
+<h1 class="title-h1">
+    Slugify
+</h1>
+<form class="form">
+    <div class="form__group">
+        <label for="title" class="form__label">Artikeltitel</label>
+        <input id="title" class="form__input" type="text">
+    </div>
+    <div class="form__group">
+        <label for="slugify" class="form__label">Slug</label>
+        <textarea id="slugify" class="form__input" rows="1">
+
+        </textarea>
+    </div>
+    <div class="form__group form__group--button">
+        <button id="copy" class="form__button" type="button">Slug kopieren</button>
+    </div>
+</form>
+
+<script>
+    const title = document.querySelector('#title');
+    const slugify = document.querySelector('#slugify');
+    const copy = document.querySelector('#copy');
+    title.addEventListener('input', updateValue);
+    copy.addEventListener('click', copyToClipboard);
+
+    function updateValue(e) {
+        let slug = e.target.value.toLowerCase();
+        slugify.textContent = slug
+            .replace(' ', '-')
+            .replace('Ü', 'ue')
+            .replace('ü', 'ue')
+            .replace('Ö', 'oe')
+            .replace('ö', 'oe')
+            .replace('Ä', 'ae')
+            .replace('ä', 'ae')
+
+    }
+
+    function copyToClipboard() {
+        let copyText = slugify;
+        console.log(copyText);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand('copy');
+    }
+</script>
+</body>
+
+</html>
