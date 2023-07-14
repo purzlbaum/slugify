@@ -226,9 +226,7 @@
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand('copy');
-        title.value = '';
-        slugify.value = '';
-        title.focus();
+        title.select();
         message.classList.add('success');
         setTimeout(function() {
             message.classList.remove('success');
