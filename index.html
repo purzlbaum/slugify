@@ -139,6 +139,17 @@
             font-family: 'Inter', sans-serif;
         }
 
+        .form__group--message {
+            padding-left: 100px;
+            color: #388E3C;
+            opacity: 0;
+            transition: opacity 0.4s linear;
+        }
+
+        .form__group--message.success {
+            opacity: 1;
+        }
+
         .form__button {
             font-family: 'Inter', sans-serif;
             padding: 6px 12px;
@@ -169,6 +180,9 @@
         <textarea id="slugify" class="form__input" rows="1">
 
         </textarea>
+    </div>
+    <div class="form__group form__group--message">
+        Der Slug wurde erfolgreich in die Zwischenablage kopiert.
     </div>
     <div class="form__group form__group--button">
         <button id="copy" class="form__button" type="button">Slug kopieren</button>
@@ -208,10 +222,17 @@
 
     function copyToClipboard() {
         let copyText = slugify;
-        console.log(copyText);
+        const message = document.querySelector('.form__group--message');
         copyText.select();
         copyText.setSelectionRange(0, 99999);
         document.execCommand('copy');
+        title.value = '';
+        slugify.value = '';
+        title.focus();
+        message.classList.add('success');
+        setTimeout(function() {
+            message.classList.remove('success');
+        }, 3000);
     }
 </script>
 </body>
