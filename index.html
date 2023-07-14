@@ -184,15 +184,26 @@
 
     function updateValue(e) {
         let slug = e.target.value.toLowerCase();
-        slugify.textContent = slug
-            .replace(' ', '-')
-            .replace('Ü', 'ue')
-            .replace('ü', 'ue')
-            .replace('Ö', 'oe')
-            .replace('ö', 'oe')
-            .replace('Ä', 'ae')
-            .replace('ä', 'ae')
-
+        slugify.textContent = slug.trim()
+            .replaceAll(' ', '-')
+            .replaceAll('ü', 'ue')
+            .replaceAll('ö', 'oe')
+            .replaceAll('ä', 'ae')
+            .replaceAll('à', 'a')
+            .replaceAll('â', 'a')
+            .replaceAll('ç', 'c')
+            .replaceAll('è', 'e')
+            .replaceAll('é', 'e')
+            .replaceAll('ê', 'e')
+            .replaceAll('ë', 'e')
+            .replaceAll('î', 'i')
+            .replaceAll('ì', 'i')
+            .replaceAll('ï', 'i')
+            .replaceAll('ô', 'o')
+            .replaceAll('ò', 'o')
+            .replaceAll('ß', 'ss')
+            .replaceAll('û', 'u')
+            .replaceAll('ù', 'u')
     }
 
     function copyToClipboard() {
