@@ -217,6 +217,8 @@
         let slug = e.target.value.toLowerCase();
         slugify.textContent = slug.trim()
             .replaceAll(' ', '-')
+            .replaceAll(':', '-')
+            .replaceAll('--', '-')
             .replaceAll('/', '-')
             .replaceAll('ü', 'ue')
             .replaceAll('ö', 'oe')
