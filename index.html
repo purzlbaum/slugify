@@ -214,30 +214,33 @@
     copy.addEventListener('click', copyToClipboard);
 
     function updateValue(e) {
-        let slug = e.target.value.toLowerCase();
-        slugify.textContent = slug.trim()
-            .replaceAll(' ', '-')
-            .replaceAll(':', '-')
-            .replaceAll('--', '-')
-            .replaceAll('/', '-')
-            .replaceAll('ü', 'ue')
-            .replaceAll('ö', 'oe')
-            .replaceAll('ä', 'ae')
-            .replaceAll('à', 'a')
-            .replaceAll('â', 'a')
-            .replaceAll('ç', 'c')
-            .replaceAll('è', 'e')
-            .replaceAll('é', 'e')
-            .replaceAll('ê', 'e')
-            .replaceAll('ë', 'e')
-            .replaceAll('î', 'i')
-            .replaceAll('ì', 'i')
-            .replaceAll('ï', 'i')
-            .replaceAll('ô', 'o')
-            .replaceAll('ò', 'o')
-            .replaceAll('ß', 'ss')
-            .replaceAll('û', 'u')
-            .replaceAll('ù', 'u')
+        let slug = e.target.value.toLowerCase().trim();
+
+        // Arrays für zu ersetzende Sonderzeichen und deren Ersatzwerte
+        const specialChars = [',', '(', ')', ' ', ':', '--', '/', '­'];
+        const specialReplacements = ['-', '', '', '-', '-', '-', '-', ''];
+
+        // Arrays für zu ersetzende Buchstaben und deren Ersatzwerte
+        const letters = ['ü', 'ö', 'ä', 'à', 'â', 'ç', 'è', 'é', 'ê', 'ë', 'î', 'ì', 'ï', 'ô', 'ò', 'ß', 'û', 'ù'];
+        const letterReplacements = ['ue', 'oe', 'ae', 'a', 'a', 'c', 'e', 'e', 'e', 'e', 'i', 'i', 'i', 'o', 'o', 'ss', 'u', 'u'];
+
+        // Ersetzungen für Sonderzeichen
+        for (let i = 0; i < specialChars.length; i++) {
+            slug = slug.split(specialChars[i]).join(specialReplacements[i]);
+        }
+
+        // Ersetzungen für Buchstaben
+        for (let i = 0; i < letters.length; i++) {
+            slug = slug.split(letters[i]).join(letterReplacements[i]);
+        }
+
+        // Entfernt ein abschließendes Sonderzeichen, wenn vorhanden
+        const lastChar = slug.charAt(slug.length - 1);
+        if (specialChars.includes(lastChar)) {
+            slug = slug.slice(0, -1);
+        }
+
+        slugify.textContent = slug;
     }
 
     function copyToClipboard() {
