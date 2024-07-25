@@ -217,8 +217,8 @@
         let slug = e.target.value.toLowerCase().trim();
 
         // Arrays für zu ersetzende Sonderzeichen und deren Ersatzwerte
-        const specialChars = [',', '(', ')', ' ', ':', '--', '/', '­'];
-        const specialReplacements = ['-', '', '', '-', '-', '-', '-', ''];
+        const specialChars = [',', '(', ')', ' ', ':', '--', '/', '­', "'", '"', ";"];
+        const specialReplacements = ['-', '', '', '-', '-', '-', '-', '', '', '', '-'];
 
         // Arrays für zu ersetzende Buchstaben und deren Ersatzwerte
         const letters = ['ü', 'ö', 'ä', 'à', 'â', 'ç', 'è', 'é', 'ê', 'ë', 'î', 'ì', 'ï', 'ô', 'ò', 'ß', 'û', 'ù'];
